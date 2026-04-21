@@ -1,6 +1,7 @@
 ---
 name: crypto-news-http-api
 description: Use when calling the Crypto News Analyzer HTTP API for async analysis jobs, semantic search, datasource management, or health checks from OpenClaw.
+metadata: { openclaw: { skillKey: crypto-news-http-api, primaryEnv: API_KEY } }
 ---
 
 # Crypto News HTTP API Skill
@@ -41,6 +42,27 @@ For detailed guides, see:
 - [Semantic Search Reference](references/semantic-search.md)
 - [Datasource Management Reference](references/datasource-management.md)
 - [Operations and Maintenance Reference](references/operations-and-maintenance.md)
+
+## OpenClaw Setup
+
+Install this skill into `<workspace>/skills`, `<workspace>/.agents/skills`, `~/.agents/skills`, or `~/.openclaw/skills`. Start a new OpenClaw session after installing or updating the skill so the refreshed snapshot is picked up.
+
+This skill declares `metadata.openclaw.primaryEnv: API_KEY`. In OpenClaw, you can inject the bearer token for each run through `~/.openclaw/openclaw.json`:
+
+```json5
+{
+  skills: {
+    entries: {
+      "crypto-news-http-api": {
+        enabled: true,
+        apiKey: "YOUR_API_KEY"
+      }
+    }
+  }
+}
+```
+
+If you are using a non-production deployment, replace `https://news.tradao.xyz` with your local or private base URL in each request you issue.
 
 ## Analyze Workflow
 

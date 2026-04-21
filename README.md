@@ -1,39 +1,42 @@
 # skills
 
-Installable OpenClaw/Codex skills published from this repository.
+Installable OpenClaw skills published from this repository.
 
 ## Included Skills
 
 - `crypto-news-http-api` - Call the Crypto News Analyzer HTTP API for async analysis jobs, semantic search, datasource management, and health checks.
 
-## Install
+## Install In OpenClaw
 
-Install a tagged release instead of `main` so behavior stays stable:
+OpenClaw loads skills from `<workspace>/skills`, `<workspace>/.agents/skills`, `~/.agents/skills`, and `~/.openclaw/skills`. Until this skill is published on ClawHub, install it by copying the versioned skill directory from this repo into one of those locations.
 
-```bash
-python3 install-skill-from-github.py \
-  --repo LaceLetho/skills \
-  --path skills/crypto-news-http-api \
-  --ref v0.1.0
-```
-
-You can also install from a GitHub URL:
+Shared install for all local OpenClaw workspaces:
 
 ```bash
-python3 install-skill-from-github.py \
-  --url https://github.com/LaceLetho/skills/tree/v0.1.0/skills/crypto-news-http-api
+git clone --branch <tag> --depth 1 https://github.com/LaceLetho/skills.git
+mkdir -p ~/.openclaw/skills
+cp -R skills/skills/crypto-news-http-api ~/.openclaw/skills/
 ```
+
+Workspace-local install:
+
+```bash
+git clone --branch <tag> --depth 1 https://github.com/LaceLetho/skills.git
+mkdir -p ./skills
+cp -R skills/skills/crypto-news-http-api ./skills/
+```
+
+Start a new OpenClaw session after installing or updating the skill so the new snapshot is loaded.
+
+Replace `<tag>` with a released version such as `v0.2.0`.
 
 ## Upgrade
 
-The current installer copies the skill into `$CODEX_HOME/skills/<skill-name>` and aborts if that directory already exists. Upgrade by removing the old copy, then reinstalling the new tagged version:
+Replace the existing `crypto-news-http-api` directory with a newer tagged copy from this repo, then start a new OpenClaw session.
+
+Once the skill is published to ClawHub, the native OpenClaw path becomes:
 
 ```bash
-rm -rf ~/.codex/skills/crypto-news-http-api
-python3 install-skill-from-github.py \
-  --repo LaceLetho/skills \
-  --path skills/crypto-news-http-api \
-  --ref v0.1.0
+openclaw skills install crypto-news-http-api
+openclaw skills update --all
 ```
-
-When you publish a new version, replace `v0.1.0` with the newer tag such as `v0.2.0`.

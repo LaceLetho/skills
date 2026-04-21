@@ -1,7 +1,0 @@
-interface:
-  display_name: "Crypto News HTTP API"
-  short_description: "Call the Crypto News Analyzer HTTP API"
-  default_prompt: "Use $crypto-news-http-api to call the Crypto News Analyzer HTTP API for analysis, semantic search, or datasource management."
-
-policy:
-  allow_implicit_invocation: true
